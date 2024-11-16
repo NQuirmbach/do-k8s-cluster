@@ -27,12 +27,14 @@ data "digitalocean_project" "project" {
 resource "digitalocean_container_registry" "registry" {
   name                   = "appcontainerregistry${local.enviroment}"
   subscription_tier_slug = var.container_registry_tier
+  region                 = var.region
 }
 
 resource "digitalocean_kubernetes_cluster" "cluster" {
-  name    = "app-cluster-${local.enviroment}"
-  region  = var.region
-  version = var.cluster_version
+  name                 = "app-cluster-${local.enviroment}"
+  region               = var.region
+  version              = var.cluster_version
+  registry_integration = true
 
   node_pool {
     name       = "app-cluster-pool-${local.enviroment}"
@@ -46,6 +48,6 @@ resource "digitalocean_project_resources" "project_resources" {
   project = data.digitalocean_project.project.id
   resources = [
     digitalocean_kubernetes_cluster.cluster.urn,
-    digitalocean_container_registry.registry.id
+    digitalocean_container_registry.registry.endpoint
   ]
 }
