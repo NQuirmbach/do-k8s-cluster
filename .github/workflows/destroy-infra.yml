@@ -3,6 +3,7 @@ on: workflow_dispatch
 
 env:
   DIGITALOCEAN_TOKEN: ${{ secrets.DIGITALOCEAN_TOKEN }}
+  ARM_ACCESS_KEY: ${{ secrets.ARM_ACCESS_KEY }}
 
 jobs:
   plan:
