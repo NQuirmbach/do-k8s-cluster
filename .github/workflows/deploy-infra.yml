@@ -1,4 +1,4 @@
-name: Deploy Azure Infra
+name: Deploy Digital Ocean Infra
 on:
   push:
     branches:

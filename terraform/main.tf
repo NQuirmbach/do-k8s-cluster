@@ -10,10 +10,10 @@ terraform {
 locals {
   enviroment = terraform.workspace
   suffix     = random_integer.rid.result
-  tags = {
-    env = terraform.workspace
-    app = "k3s-cluster"
-  }
+  tags = [
+    "env:terraform.workspace",
+    "app:k3s-cluster"
+  ]
 }
 
 provider "digitalocean" {
