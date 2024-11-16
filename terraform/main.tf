@@ -50,6 +50,6 @@ resource "digitalocean_project_resources" "project_resources" {
   project = data.digitalocean_project.project.id
   resources = [
     digitalocean_kubernetes_cluster.cluster.urn,
-    digitalocean_container_registry.registry.endpoint
+    "do:registry:${digitalocean_container_registry.registry.id}"
   ]
 }
