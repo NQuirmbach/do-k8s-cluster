@@ -20,7 +20,7 @@ data "digitalocean_project" "project" {
 
 
 resource "digitalocean_container_registry" "registry" {
-  name                   = "foobar"
+  name                   = "appcontainerregistry${local.enviroment}"
   subscription_tier_slug = var.container_registry_tier
 }
 
@@ -41,6 +41,6 @@ resource "digitalocean_project_resources" "project_resources" {
   project = data.digitalocean_project.project.id
   resources = [
     digitalocean_kubernetes_cluster.cluster.urn,
-    digitalocean_container_registry.registry.urn
+    digitalocean_container_registry.registry.id
   ]
 }
