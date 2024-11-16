@@ -26,7 +26,7 @@ jobs:
 
       - name: Init OpenTofu
         working-directory: terraform
-        run: tofu init
+        run: tofu init -reconfigure
 
       - name: Switch workspace
         working-directory: terraform
