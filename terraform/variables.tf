@@ -18,3 +18,8 @@ variable "cluster_node_count" {
   type        = number
   description = "Kubernetes cluster node count"
 }
+
+variable "container_registry_tier" {
+  type        = string
+  description = "Container registry tier: CLI command: doctl registry options subscription-tiers"
+}
