@@ -41,9 +41,7 @@ jobs:
         working-directory: terraform
         env:
           TF_LOG: DEBUG
-        run: |
-          tofu init -migrate-state
-          tofu plan -var-file="environments/${{ github.ref_name }}.tfvars" -input=false
+        run: tofu plan -var-file="environments/${{ github.ref_name }}.tfvars" -input=false
 
   apply:
     runs-on: ubuntu-latest

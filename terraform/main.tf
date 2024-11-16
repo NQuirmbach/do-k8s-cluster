@@ -8,7 +8,7 @@ terraform {
   backend "azurerm" {
     storage_account_name = "csb100320013fe5f0a1"
     container_name       = "tfstate"
-    key                  = "app.${terraform.workspace}.tfstate"
+    key                  = "app.opentofu.tfstate"
   }
 }
 
