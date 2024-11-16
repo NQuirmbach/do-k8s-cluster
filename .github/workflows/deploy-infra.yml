@@ -6,8 +6,7 @@ on:
       - prod
 
 env:
-  DIGITALOCEAN_TOKEN: ${{ secrets.DIGITALOCEAN_TOKEN }}
-  ARM_ACCESS_KEY: ${{ secrets.ARM_ACCESS_KEY }}
+  DIGITALOCEAN_TOKEN: ${{ secrets.DIGITALOCEAN_TOKEN }}t
 
 jobs:
   plan:
@@ -26,7 +25,7 @@ jobs:
 
       - name: Init OpenTofu
         working-directory: terraform
-        run: tofu init -migrate-state
+        run: tofu init
 
       - name: Switch workspace
         working-directory: terraform
@@ -39,6 +38,8 @@ jobs:
 
       - name: Plan changes
         working-directory: terraform
+        env:
+          TF_LOG: DEBUG
         run: |
           tofu init -migrate-state
           tofu plan -var-file="environments/${{ github.ref_name }}.tfvars" -input=false
