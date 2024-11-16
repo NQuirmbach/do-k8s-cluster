@@ -59,10 +59,10 @@ jobs:
         working-directory: infra
         run: tofu workspace select -or-create ${{ github.ref_name }}
 
-      - name: Create terraform var file
-        working-directory: infra
-        run: |
-          echo "cluster_node_ssh_public_key = \"${{ secrets.SSH_PUBLIC_KEY }}\"" >> terraform.tfvars
+      # - name: Create terraform var file
+      #   working-directory: infra
+      #   run: |
+      #     echo "cluster_node_ssh_public_key = \"${{ secrets.SSH_PUBLIC_KEY }}\"" >> terraform.tfvars
 
       - name: Apply changes
         working-directory: infra
