@@ -1,5 +1,5 @@
 name: Deploy Digital Ocean Infra
-run-name: Deploy to ${{ github.ref_name }} by @${{ github.actor }}
+run-name: Deploy to ${{ github.ref_name }}: ${{ github.event.head_commit.message }} by @${{ github.actor }}
 on:
   workflow_dispatch:
   push:
@@ -34,11 +34,6 @@ jobs:
         working-directory: terraform
         run: tofu workspace select -or-create ${{ github.ref_name }}
 
-      #   - name: Create terraform var file
-      #     working-directory: infra
-      #     run: |
-      #       echo "cluster_node_ssh_public_key = \"${{ secrets.SSH_PUBLIC_KEY }}\"" >> terraform.tfvars
-
       - name: Plan changes
         working-directory: terraform
         run: tofu plan -var-file="environments/${{ github.ref_name }}.tfvars" -input=false
@@ -72,7 +67,7 @@ jobs:
 
       - uses: actions/upload-artifact@master
         with:
-          name: tf-ouput
+          name: tf-output
           path: terraform/tf-output.json
 
   install-argocd:
