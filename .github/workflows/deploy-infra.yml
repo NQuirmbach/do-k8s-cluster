@@ -93,6 +93,11 @@ jobs:
           cluster_name=$(jq ".cluster_name.value" -r tf-output.json)
           echo "Found cluster '$cluster_name'"
           doctl kubernetes cluster kubeconfig save $cluster_name
+          which kubectl
+
+      - uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: cat $HOME/.kube/config | base64
 
       - uses: actions-hub/kubectl@master
         name: Install argocd
