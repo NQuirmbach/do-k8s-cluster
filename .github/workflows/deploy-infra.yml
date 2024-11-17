@@ -94,4 +94,6 @@ jobs:
           doctl kubernetes cluster kubeconfig save $cluster_name
 
       - name: Install
-        run: kubectl apply -k https://github.com/argoproj/argo-cd/manifests/crds\?ref\=stable
+        run: |
+          kubectl apply -k https://github.com/argoproj/argo-cd/blob/master/manifests/install.yaml
+          kubectl apply -k https://github.com/argoproj/argo-cd/manifests/crds\?ref\=stable
