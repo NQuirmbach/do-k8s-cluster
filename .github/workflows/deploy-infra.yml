@@ -1,12 +1,11 @@
 name: Deploy Digital Ocean Infra
+run-name: Deploy to ${{ github.ref_name }} by @${{ github.actor }}
 on:
   workflow_dispatch:
   push:
     branches:
       - staging
       - prod
-    paths:
-      - terraform
 
 env:
   DIGITALOCEAN_TOKEN: ${{ secrets.DIGITALOCEAN_TOKEN }}
@@ -71,3 +70,38 @@ jobs:
       - name: Apply changes
         working-directory: terraform
         run: tofu apply -var-file="environments/${{ github.ref_name }}.tfvars" -auto-approve
+
+      - name: Store outputs
+        working-directory: terraform
+        run: terraform output -json > output.json
+
+      - uses: actions/upload-artifact@master
+        with:
+          name: tf-ouput
+          path: terraform/output.json
+
+  # install-argocd:
+  #   runs-on: ubuntu-latest
+  #   needs: apply
+  #   environment: ${{ github.ref_name }}
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v3
+
+  #     - name: Install doctl
+  #       uses: digitalocean/action-doctl@v2
+  #       with:
+  #         token: ${{ secrets.DIGITALOCEAN_TOKEN }}
+
+  #     - name: Get kubeconfig
+  #       run: doctl kubernetes cluster kubeconfig save {{ APP_CLUSTER_NAME }}
+
+  #     - uses: actions/download-artifact@master
+  #       with:
+  #         name: tf-output
+  #         path: .
+
+  #     - uses: actions-hub/kubectl@master
+  #       name: Install argocd
+  #       with:
+  #         args: apply -k https://github.com/argoproj/argo-cd/manifests/crds\?ref\=stable
