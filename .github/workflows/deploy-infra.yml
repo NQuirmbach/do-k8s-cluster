@@ -1,9 +1,12 @@
 name: Deploy Digital Ocean Infra
 on:
+  workflow_dispatch:
   push:
     branches:
       - staging
       - prod
+    paths:
+      - terraform
 
 env:
   DIGITALOCEAN_TOKEN: ${{ secrets.DIGITALOCEAN_TOKEN }}
