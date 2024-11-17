@@ -88,13 +88,11 @@ jobs:
           name: tf-output
           path: .
 
-      - name: Get clustername
-        run: |
-          APP_CLUSTER_NAME=$(jq ".cluster_name.value" -r tf-output.json)
-          echo "Found cluster '$APP_CLUSTER_NAME'"
-
       - name: Get kubeconfig
-        run: doctl kubernetes cluster kubeconfig save {{ APP_CLUSTER_NAME }}
+        run: |
+          cluster_name=$(jq ".cluster_name.value" -r tf-output.json)
+          echo "Found cluster '$cluster_name'"
+          doctl kubernetes cluster kubeconfig save $cluster_name
 
       - uses: actions-hub/kubectl@master
         name: Install argocd
