@@ -1,5 +1,5 @@
 name: Deploy Digital Ocean Infra
-run-name: Deploy to ${{ github.ref_name }}: ${{ github.event.head_commit.message }} by @${{ github.actor }}
+run-name: "Deploy to ${{ github.ref_name }}: ${{ github.event.head_commit.message }} by @${{ github.actor }}"
 on:
   workflow_dispatch:
   push:
