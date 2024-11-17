@@ -90,8 +90,8 @@ jobs:
 
       - name: Get clustername
         run: |
-          CLUSTER_NAME=$(jq ".cluster_name.value" -r tf-output.json)
-          echo "Found cluster '$CLUSTER_NAME'"
+          APP_CLUSTER_NAME=$(jq ".cluster_name.value" -r tf-output.json)
+          echo "Found cluster '$APP_CLUSTER_NAME'"
 
       - name: Get kubeconfig
         run: doctl kubernetes cluster kubeconfig save {{ APP_CLUSTER_NAME }}
