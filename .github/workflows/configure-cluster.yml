@@ -1,5 +1,13 @@
 name: Configure Kubernetes cluster
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - staging
+      - prod
+    paths:
+      - ansible
+      - .github/workflows/configure-cluster.yml
 
 jobs:
   configure-kubernetes:
