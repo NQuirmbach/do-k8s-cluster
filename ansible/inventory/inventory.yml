@@ -1,4 +1,10 @@
 all:
-  hosts:
-    localhost:
-      ansible_connection: local
+  children:
+    staging:
+      hosts:
+        localhost:
+          ansible_connection: local
+    production:
+      hosts:
+        localhost:
+          ansible_connection: local

@@ -4,3 +4,22 @@
   kubernetes.core.k8s:
     state: present
     src: https://github.com/jetstack/cert-manager/releases/download/v1.7.1/cert-manager.yaml
+
+- name: Create ClusterIssuer
+  k8s:
+    state: present
+    definition:
+      apiVersion: cert-manager.io/v1
+      kind: ClusterIssuer
+      metadata:
+        name: "{{ cert_manager_issuer.name }}"
+      spec:
+        acme:
+          server: "{{ cert_manager_issuer.server }}"
+          email: "{{ cert_manager_issuer.email }}"
+          privateKeySecretRef:
+            name: "{{ cert_manager_issuer.private_key_secret }}"
+          solvers:
+            - http01:
+                ingress:
+                  class: nginx

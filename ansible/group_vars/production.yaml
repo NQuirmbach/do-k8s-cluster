@@ -1,0 +1,5 @@
+cert_manager_issuer:
+  name: letsencrypt-prod
+  server: https://acme-v02.api.letsencrypt.org/directory
+  email: nils.quirmbach@outlook.com
+  private_key_secret: letsencrypt-prod
