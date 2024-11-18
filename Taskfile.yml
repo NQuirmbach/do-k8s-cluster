@@ -1,0 +1,10 @@
+version: '3'
+
+tasks:
+  install-test-resouces:
+    dir: test
+    cmds:
+      - echo "Installing test resources"
+      - kubectl apply -f echo1.yml
+      - kubectl apply -f echo2.yml
+      - kubectl apply -f echo_ingress.yml
