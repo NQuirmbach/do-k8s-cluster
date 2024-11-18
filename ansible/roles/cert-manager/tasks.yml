@@ -1,5 +1,11 @@
 ---
-- name: Install Let's Encrypt cert-manger
+- name: Download cert-manager yaml file
+  ansible.builtin.get_url:
+    url: https://github.com/jetstack/cert-manager/releases/download/v1.7.1/cert-manager.yaml
+    dest: ./cert-manager.yaml
+
+- name: Install cert-manger
   kubernetes.core.k8s:
     state: present
-    src: https://github.com/cert-manager/cert-manager/releases/download/v1.16.1/cert-manager.yaml
+    apply: true
+    src: ./cert-manager.yaml
