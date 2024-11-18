@@ -40,4 +40,4 @@ jobs:
 
       - name: Configure Kubernetes
         working-directory: ansible
-        run: ansible-playbook playbooks/k8s_setup.yml -i inventory/${{ github.ref_name }}/hosts
+        run: ansible-playbook k8s_setup.yml -i inventories/${{ github.ref_name }}/hosts
