@@ -39,6 +39,5 @@ jobs:
         run: kubectl get pods
 
       - name: Configure Kubernetes
-        working-directory: ansible/
-        run: |
-          ansible-playbook playbooks/k8s_setup.yml --limit ${{ github.ref_name }}
+        working-directory: ansible
+        run: ansible-playbook playbooks/k8s_setup.yml -i inventory/${{ github.ref_name }}/hosts
