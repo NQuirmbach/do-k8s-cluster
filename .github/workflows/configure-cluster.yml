@@ -41,4 +41,4 @@ jobs:
       - name: Configure Kubernetes
         working-directory: ansible/
         run: |
-          ansible-playbook -i inventory.yml playbooks/k8s_setup.yml --limit ${{ github.ref_name }}
+          ansible-playbook playbooks/k8s_setup.yml --limit ${{ github.ref_name }}
