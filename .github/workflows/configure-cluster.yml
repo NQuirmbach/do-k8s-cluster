@@ -6,7 +6,7 @@ on:
       - staging
       - prod
     paths:
-      - ansible
+      - ansible/**
       - .github/workflows/configure-cluster.yml
 
 jobs:

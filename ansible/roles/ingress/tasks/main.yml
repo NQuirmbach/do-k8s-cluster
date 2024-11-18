@@ -15,4 +15,3 @@
       helm upgrade --install ingress-nginx ingress-nginx/ingress-nginx
       --namespace ingress-nginx
       --create-namespace
-      -f ../templates/values.yaml
