@@ -1,0 +1,12 @@
+---
+- name: Configure Kubernetes Cluster
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Include ingress role
+      include_role:
+        name: ingress
+
+    # - name: Include argocd role
+    #   include_role:
+    #     name: argocd

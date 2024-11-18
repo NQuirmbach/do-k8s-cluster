@@ -6,6 +6,9 @@ on:
     branches:
       - staging
       - prod
+    paths:
+      - terraform/**
+      - .github/workflows/deploy-infra.yml
 
 env:
   DIGITALOCEAN_TOKEN: ${{ secrets.DIGITALOCEAN_TOKEN }}
@@ -94,6 +97,4 @@ jobs:
           doctl kubernetes cluster kubeconfig save $cluster_name
 
       - name: Install
-        run: |
-          kubectl apply -k https://github.com/argoproj/argo-cd/blob/master/manifests/install.yaml
-          kubectl apply -k https://github.com/argoproj/argo-cd/manifests/crds\?ref\=stable
+        run: kubectl apply -k https://github.com/argoproj/argo-cd/blob/master/manifests/install.yaml
