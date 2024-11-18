@@ -30,7 +30,7 @@ jobs:
       - name: Test connection
         run: kubectl get pods
 
-      # - name: Configure Kubernetes
-      #   working-directory: ansible/
-      #   run: |
-      #     ansible-playbook playbooks/k8s_setup.yml
+      - name: Configure Kubernetes
+        working-directory: ansible/
+        run: |
+          ansible-playbook playbooks/k8s_setup.yml

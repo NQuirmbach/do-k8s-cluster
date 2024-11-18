@@ -8,7 +8,6 @@ on:
       - prod
     paths:
       - terraform/**
-      - .github/workflows/deploy-infra.yml
 
 env:
   DIGITALOCEAN_TOKEN: ${{ secrets.DIGITALOCEAN_TOKEN }}
@@ -72,29 +71,3 @@ jobs:
         with:
           name: tf-output
           path: terraform/tf-output.json
-
-  install-argocd:
-    runs-on: ubuntu-latest
-    needs: apply
-    environment: ${{ github.ref_name }}
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Install doctl
-        uses: digitalocean/action-doctl@v2
-        with:
-          token: ${{ secrets.DIGITALOCEAN_TOKEN }}
-
-      - uses: actions/download-artifact@master
-        with:
-          name: tf-output
-          path: .
-
-      - name: Get kubeconfig
-        run: |
-          cluster_name=$(jq ".cluster_name.value" -r tf-output.json)
-          doctl kubernetes cluster kubeconfig save $cluster_name
-
-      - name: Install
-        run: kubectl apply -k https://github.com/argoproj/argo-cd/blob/master/manifests/install.yaml
