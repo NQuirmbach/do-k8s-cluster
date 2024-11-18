@@ -1,8 +1,15 @@
 ---
+
 - name: Configure Kubernetes Cluster
   hosts: localhost
   gather_facts: false
   tasks:
+    - name: Install Helm
+      ansible.builtin.command:
+        cmd: curl -fsSL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+      args:
+        creates: /usr/local/bin/helm
+
     - name: Include ingress role
       include_role:
         name: ingress

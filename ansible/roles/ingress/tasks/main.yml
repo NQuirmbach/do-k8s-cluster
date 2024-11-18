@@ -1,23 +1,18 @@
 ---
-- name: Deploy NGINX Ingress Controller
-  k8s:
-    state: present
-    definition:
-      apiVersion: apps/v1
-      kind: Deployment
-      metadata:
-        name: ingress-nginx-controller
-        namespace: ingress-nginx
-      spec:
-        replicas: 1
-        selector:
-          matchLabels:
-            app: ingress-nginx
-        template:
-          metadata:
-            labels:
-              app: ingress-nginx
-          spec:
-            containers:
-              - name: controller
-                image: k8s.gcr.io/ingress-nginx/controller:v1.9.1
+- name: Add Helm repository
+  ansible.builtin.command:
+    cmd: helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+  args:
+    creates: ~/.cache/helm/repository/ingress-nginx-index.yaml
+
+- name: Update Helm repositories
+  ansible.builtin.command:
+    cmd: helm repo update
+
+- name: Install NGINX ingress using Helm
+  ansible.builtin.command:
+    cmd: >
+      helm upgrade --install ingress-nginx ingress-nginx/ingress-nginx
+      --namespace ingress-nginx
+      --create-namespace
+      -f ../templates/values.yaml
