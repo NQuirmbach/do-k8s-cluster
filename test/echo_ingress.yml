@@ -2,7 +2,15 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: echo-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-staging"
+    kubernetes.io/ingress.class: "nginx"
 spec:
+  tls:
+  - hosts:
+    - echo1.nquirmbach.de
+    - echo2.nquirmbach.de
+    secretName: echo-tls
   ingressClassName: nginx
   rules:
   - host: echo1.nquirmbach.de

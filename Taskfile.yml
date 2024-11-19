@@ -8,3 +8,6 @@ tasks:
       - kubectl apply -f echo1.yml
       - kubectl apply -f echo2.yml
       - kubectl apply -f echo_ingress.yml
+
+  get-kube-config:
+    cmd: doctl kubernetes cluster kubeconfig save app-cluster-staging
