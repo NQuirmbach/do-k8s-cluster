@@ -13,9 +13,9 @@
       include_role:
         name: ingress
 
-    # - name: Include cert-manager role
-    #   include_role:
-    #     name: cert-manager
+    - name: Include cert-manager role
+      include_role:
+        name: cert-manager
 
     # - name: Include argocd role
     #   include_role:

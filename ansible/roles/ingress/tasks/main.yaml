@@ -1,13 +1,9 @@
 ---
 - name: Add Helm repository
   ansible.builtin.command:
-    cmd: helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+    cmd: helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx  --force-update
   args:
     creates: ~/.cache/helm/repository/ingress-nginx-index.yaml
-
-- name: Update Helm repositories
-  ansible.builtin.command:
-    cmd: helm repo update
 
 - name: Install NGINX ingress using Helm
   ansible.builtin.command:
