@@ -5,9 +5,10 @@ tasks:
     dir: test
     cmds:
       - echo "Installing test resources"
-      - kubectl apply -f echo1.yml
-      - kubectl apply -f echo2.yml
-      - kubectl apply -f echo_ingress.yml
+      - kubectl apply -f echo1.yaml
+      - kubectl apply -f echo2.yaml
+      - kubectl apply -f ingress_nginx_svc.yaml
+      - kubectl apply -f echo_ingress.yaml
 
   get-kube-config:
     cmd: doctl kubernetes cluster kubeconfig save app-cluster-staging
