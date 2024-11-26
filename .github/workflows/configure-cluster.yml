@@ -7,7 +7,7 @@ on:
       - prod
     paths:
       - ansible/**
-      - .github/workflows/configure-cluster.yml
+      - .github/workflows/configure-cluster.yaml
 
 jobs:
   configure-kubernetes:
@@ -40,4 +40,4 @@ jobs:
 
       - name: Configure Kubernetes
         working-directory: ansible
-        run: ansible-playbook k8s_setup.yml -i inventories/${{ github.ref_name }}/hosts
+        run: ansible-playbook k8s_setup.yaml -i inventories/${{ github.ref_name }}/hosts

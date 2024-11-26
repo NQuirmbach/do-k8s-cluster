@@ -7,7 +7,6 @@ tasks:
       - echo "Installing test resources"
       - kubectl apply -f echo1.yaml
       - kubectl apply -f echo2.yaml
-      - kubectl apply -f ingress_nginx_svc.yaml
       - kubectl apply -f echo_ingress.yaml
 
   get-kube-config:
