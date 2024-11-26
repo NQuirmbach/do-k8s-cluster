@@ -7,7 +7,7 @@ on:
       - prod
     paths:
       - ansible/**
-      - .github/workflows/configure-cluster.yaml
+      - .github/workflows/configure-cluster.yml
 
 jobs:
   configure-kubernetes:
