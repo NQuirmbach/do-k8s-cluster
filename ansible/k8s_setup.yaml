@@ -9,9 +9,9 @@
       args:
         creates: /usr/local/bin/helm
 
-    - name: Include ingress role
-      include_role:
-        name: ingress
+    # - name: Include ingress role
+    #   include_role:
+    #     name: ingress
 
     - name: Include cert-manager role
       include_role:
